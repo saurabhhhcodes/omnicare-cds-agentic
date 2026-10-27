@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: omnicare-cds
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: oregon
+    envVars:
+      - key: AWS_CDS_MODE
+        value: HYBRID_SIMULATION
+      - key: PORT
+        value: 8000

@@ -1,0 +1,31 @@
+# Virtual Environment
+.venv/
+.venv*/
+venv/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/node_modules/
+recorder/node_modules/
+recorder/recordings/
+*.log
+
+# Data
+data/*.db
+data/*.sqlite3
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
