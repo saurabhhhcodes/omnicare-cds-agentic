@@ -12,7 +12,7 @@
 [![Pytest](https://img.shields.io/badge/Pytest-11%2F11%20Passed%20(100%25)-brightgreen?logo=pytest&logoColor=white)](https://pytest.org)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-[**Devpost Submission Pack**](docs/DEVPOST_SUBMISSION.md) • [**Architecture Specs**](docs/ARCHITECTURE.md) • [**Video Demo Script**](docs/DEMO_VIDEO_SCRIPT.md) • [**Recorded Demo Video**](omnicare_product_walkthrough_hd.mp4) • [**Quickstart**](#-quick-start-guide)
+[**Master Narrated Demo (3m 30s)**](omnicare_master_demo_narrated_hd.mp4) • [**Short Walkthrough (34s)**](omnicare_walkthrough_narrated.mp4) • [**Devpost Submission Pack**](docs/DEVPOST_SUBMISSION.md) • [**Architecture Specs**](docs/ARCHITECTURE.md) • [**Video Script & Prompts**](docs/DEMO_VIDEO_SCRIPT.md) • [**Quickstart**](#-quick-start-guide)
 
 ---
 

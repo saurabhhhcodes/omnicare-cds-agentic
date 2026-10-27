@@ -36,8 +36,9 @@ AWS Communication Developer Services (CDS), AWS End User Messaging (EUM), Rich C
 - **Interactive OpenAPI / Swagger Docs**: `https://state-roses-dinner-rogers.trycloudflare.com/docs`
 - **Health Diagnostics**: `https://state-roses-dinner-rogers.trycloudflare.com/health`
 - **GitHub Repository (Apache 2.0)**: `https://github.com/saurabhhhcodes/omnicare-cds-agentic`
-- **Recorded HD Walkthrough Video**: `omnicare_product_walkthrough_hd.mp4` (Saved in repository root)
-- **Demo Video Script for Flow**: `docs/DEMO_VIDEO_SCRIPT.md`
+- **Master Narrated Presentation Video (3m 30s)**: `omnicare_master_demo_narrated_hd.mp4` (Full Hackathon Demo with Studio Voiceover)
+- **Short Narrated Walkthrough Video (34s)**: `omnicare_walkthrough_narrated.mp4` (High-Energy Live UI Walkthrough)
+- **Full Video & Voiceover Script**: `docs/DEMO_VIDEO_SCRIPT.md`
 
 ---
 

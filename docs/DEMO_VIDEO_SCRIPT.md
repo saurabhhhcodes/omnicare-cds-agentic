@@ -1,72 +1,48 @@
-# 🎬 OmniCare CDS — 3-Minute Video Demo & Narration Script
+# 🎬 OmniCare CDS — Demonstration Videos & Narration Scripts
 ### AWS Communication Developer Services (CDS) Agentic AI Partner Hackathon ($40,000 Prize Pool)
 **Targeting**: 1st Place Grand Prize ($18,000) & Best of WhatsApp Sponsored by Meta ($10,000)
 
-> **Video File Recorded**: `omnicare_product_walkthrough_hd.mp4` (Saved in project root)  
-> **Target Video Length**: 2 minutes 45 seconds to 3 minutes  
-> **Lead Judges**: Marie Carlton (Director Applied AI, AWS), Sara Caleffi (Director Applied AI, AWS), Tom Sly (Director CDS, AWS)
+---
+
+## 📹 Video Assets Summary
+
+Two distinct high-definition MP4 videos with synchronized studio-mastered voiceover narration are available:
+
+| Video Asset | Description | Duration | Resolution / Specs | File Link |
+|---|---|---|---|---|
+| **Master Hackathon Presentation** (Recommended for Devpost) | Comprehensive end-to-end demonstration covering the real-world healthcare crisis, Bedrock AgentCore multi-agent architecture, all 4 AWS CDS channels (SMS, WhatsApp, RCS, SES), Clinic EHR sync, and quantitative ROI. | **3 min 30 sec** (210.7s) | 1440x900 HD @ 30 FPS, EBU R128 Mastered Voiceover | [omnicare_master_demo_narrated_hd.mp4](file:///Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/omnicare-cds-agentic/omnicare_master_demo_narrated_hd.mp4) |
+| **Short Product Walkthrough** | Rapid, high-energy live UI walkthrough showing photo upload, vision diagnosis, RCS carousel 1-tap select, SES inbox with QR code, and AgentCore trace. | **34 seconds** (33.8s) | 1440x900 HD @ 30 FPS, Voiceover Synced | [omnicare_walkthrough_narrated.mp4](file:///Users/saurabhkumarbajpaiai/.gemini/antigravity/scratch/omnicare-cds-agentic/omnicare_walkthrough_narrated.mp4) |
 
 ---
 
-## ⏱️ Video Timeline & Scene Breakdown
+## ⏱️ Master Video Timeline & Spoken Transcript (3:30)
 
-| Timestamp | Visual on Screen | Primary Voiceover & Message |
-|---|---|---|
-| **0:00 – 0:35** | **Title Slide & The Healthcare Bottleneck** | Outbound calls fail; patients need fluid cross-channel conversations across SMS, RCS, WhatsApp, and Email. |
-| **0:35 – 1:20** | **WhatsApp Social & Multimodal Vision Triage** | Meta \$10k prize showcase: patient uploads ankle photo, Claude 3.5 Sonnet diagnoses edema in real time. |
-| **1:20 – 2:05** | **AWS EUM RCS Interactive Pharmacy Carousel** | 1-tap pharmacy reservation: rich cards with real-time stock, distance, and geofencing. |
-| **2:05 – 2:35** | **Amazon SES Verified Prescription Pass** | Instant authenticated email with contactless QR code express pass, dosage tables, and DKIM/SPF verification. |
-| **2:35 – 3:00** | **Bedrock AgentCore Trace & 99.6% Cost Reduction** | Multi-agent reasoning trace, context graph persistence, and enterprise clinical ROI (\$0.026 vs \$7.50). |
+### Scene 1: Problem Statement & OmniCare CDS Introduction (0:00 – 0:43)
+- **Visuals**: OmniCare CDS header, AWS CDS architecture badges (AWS EUM SMS, RCS, WhatsApp, Amazon SES, Amazon Bedrock AgentCore), and active patient profile card (Elena Rostova, Congestive Heart Failure).
+- **Spoken Voiceover**:
+  > *"Welcome to OmniCare CDS, an autonomous omnichannel healthcare triage and delivery platform built for the AWS Communication Developer Services Partner Hackathon. Over forty-one billion dollars are spent annually on preventable hospital readmissions in the United States. For congestive heart failure patients, managing medication titrations after discharge often fails due to fragmented communication across one-way SMS alerts, unread emails, and forty-five minute phone queues. OmniCare CDS solves this by turning AWS communication channels into an intelligent, continuous conversational experience orchestrated by Amazon Bedrock AgentCore."*
 
----
+### Scene 2: AWS EUM Social (WhatsApp) & Bedrock Vision Triage (0:43 – 1:23)
+- **Visuals**: WhatsApp interface with verified business badge. Patient uploads ankle photo. Bedrock Vision Agent analyzes bilateral pitting edema (+2), cross-references EHR records, and recommends diuretic titration (Furosemide 20mg -> 40mg) with interactive action chips.
+- **Spoken Voiceover**:
+  > *"The patient journey begins with a proactive check-in. The patient chooses to continue on WhatsApp using AWS End User Messaging Social, powered by the Meta Cloud API. Here, Elena reports worsening swelling and uploads a photo of her ankles. In real time, Amazon Bedrock AgentCore invokes its Vision Triage Agent. Using Claude 3.5 Sonnet, the multimodal model analyzes the image, detects plus-two pitting edema, correlates it with her recent discharge record, and recommends an immediate Furosemide dosage increase from twenty to forty milligrams, all within the verified WhatsApp chat."*
 
-## 🎙️ Flow / Voiceover Narration Script (Copy into AI Voice Generator or Narrate Directly)
+### Scene 3: AWS EUM RCS Interactive Pharmacy Carousel (1:23 – 2:00)
+- **Visuals**: Smooth transition to RCS & SMS view. GSMA UP 2.4 compliant RCS carousel with 3 geolocated pharmacies (CVS HealthHub, Walgreens, Rite Aid), live inventory status, distance tags, and 1-tap select. CVS Pharmacy is selected with confirmation badge.
+- **Spoken Voiceover**:
+  > *"To fulfill the updated prescription, the conversation transitions seamlessly to AWS End User Messaging RCS. Instead of sending an external web link, the patient receives an interactive, GSMA Universal Profile 2.4 compliant RCS carousel. Elena reviews nearby in-network pharmacies with live inventory and distances, and selects CVS HealthHub with a single tap. The Bedrock Pharmacy Routing Agent locks the reservation instantly without requiring a separate portal login, preserving full conversational context across channels."*
 
-### Scene 1: The Omnichannel Care Crisis (0:00 – 0:35)
-**Visual**: Show OmniCare CDS header, AWS CDS badges, and the patient persona (Elena Rostova, Congestive Heart Failure).
-**Voiceover**:
-> *"Every year, millions of post-discharge patients suffer preventable hospital readmissions simply because care coordination is fragmented. Traditional hospitals rely on outbound automated phone calls that 80% of patients ignore, or rigid SMS bots that can’t handle follow-ups.*
-> 
-> *Welcome to **OmniCare CDS**, an autonomous clinical intelligence platform built on **AWS Communication Developer Services** and powered by **Amazon Bedrock AgentCore**. OmniCare meets patients wherever they are—fluidly transitioning between SMS, Rich Communication Services, WhatsApp, and Amazon SES—all within a single, persistent conversational context where the patient never has to repeat themselves."*
+### Scene 4: Amazon SES Verified Prescription Pass & Contactless QR (2:00 – 2:30)
+- **Visuals**: Amazon SES patient inbox. Verified email message displaying DKIM: PASS and SPF: PASS authentication, physician review note, dosage escalation instructions, and a dynamic contactless QR pass for express pharmacy pickup.
+- **Spoken Voiceover**:
+  > *"The moment the reservation is confirmed, Amazon Simple Email Service delivers a comprehensive, DKIM-verified clinical visit summary to Elena's inbox. The email includes physician oversight notes, dosage warnings, and a dynamic contactless QR pass for express pickup at the pharmacy counter. This completes a four-channel loop where SMS, WhatsApp, RCS, and SES work together as a single unified system."*
 
----
+### Scene 5: Amazon Bedrock AgentCore State Machine & Multi-Agent Trace (2:30 – 2:56)
+- **Visuals**: Inspection of the Bedrock AgentCore execution trace panel and tool invocation JSON modal (`analyze_symptom_or_medication_image`, `search_nearby_pharmacies`). The 4 collaborative agents are highlighted (`ClinicalTriageAgent`, `VisionTriageAgent`, `PharmacyRoutingAgent`, `OmnichannelDispatcher`).
+- **Spoken Voiceover**:
+  > *"Under the hood, Amazon Bedrock AgentCore powers this experience. Rather than a rigid scripted bot, four specialized agents collaborate through a state machine: the Clinical Triage Agent assesses patient risk, the Vision Agent inspects medical imagery, the Pharmacy Routing Agent coordinates fulfillment, and the Omnichannel Dispatcher preserves conversational memory across every channel transition."*
 
-### Scene 2: Meta WhatsApp & Multimodal Vision Triage (0:35 – 1:20)
-**Visual**: Play video segment showing the WhatsApp dark-mode interface, verified green WABA checkmark, and sample photo upload.
-**Voiceover**:
-> *"Let's look at our **Best of WhatsApp** implementation using **AWS End User Messaging Social**. 
-> 
-> Here, Elena Rostova was recently discharged for Congestive Heart Failure. She opens WhatsApp and snaps a photo of her swollen ankles. 
-> 
-> Instantly, our **Bedrock Vision Triage Agent** evaluates the image using multimodal Claude 3.5 Sonnet. The agent identifies bilateral pitting pre-tibial edema with 94% confidence, recognizes the risk of fluid retention, and immediately provides reassurance, recommends a dosage titration of her diuretic, and prompts her with interactive WhatsApp quick-reply buttons."*
-
----
-
-### Scene 3: AWS EUM RCS Carousel & 1-Tap Pharmacy Booking (1:20 – 2:05)
-**Visual**: Play video segment showing transition to RCS & SMS tab, verified sender shield, and the 3-card horizontal carousel.
-**Voiceover**:
-> *"When Elena taps 'Find Pharmacies', OmniCare's AgentCore seamlessly shifts into **AWS End User Messaging RCS**. 
-> 
-> Under GSMA Universal Profile 2.4, Elena receives an interactive, branded carousel of nearby pharmacies. Each card displays live inventory status, distance, and 24-hour drive-thru availability. 
-> 
-> With a single tap on '1-Tap Select' for CVS Health, the Pharmacy Routing Agent locks a reservation slot and generates a cryptographically signed prescription token—completing the action without Elena ever installing a third-party app or leaving her messaging inbox."*
-
----
-
-### Scene 4: Amazon SES Verified Prescription Pass (2:05 – 2:35)
-**Visual**: Play video segment showing the Amazon SES email inbox view with rendered QR code pass and DKIM/SPF pills.
-**Voiceover**:
-> *"To finalize the clinical loop, the Omnichannel Dispatcher triggers **Amazon Simple Email Service (SES)**. 
-> 
-> Within 82 milliseconds, Elena receives a verified, DKIM-signed clinical summary in her inbox. It includes full physician dosage instructions, contraindications, and an embedded contactless QR code pass that she can scan directly at the pharmacy drive-thru counter for express pickup."*
-
----
-
-### Scene 5: Bedrock AgentCore Trace & 99.6% Cost Reduction (2:35 – 3:00)
-**Visual**: Play video segment showing the Bedrock AgentCore Trace inspector, collapsible tool I/O, and the Analytics dashboard.
-**Voiceover**:
-> *"Behind this effortless experience is **Amazon Bedrock AgentCore**. In our live trace visualizer, judges can inspect the multi-agent cognitive loop: from FHIR lookups and image diagnostics to stateful channel handovers. 
-> 
-> And the business impact is staggering: compared to traditional clinical nurse call centers costing \$7.50 per inbound interaction, OmniCare CDS orchestrates the entire cross-channel flow for just **2.6 cents**—a **99.6% reduction in operational healthcare costs** while dramatically improving patient outcomes. 
-> 
-> OmniCare CDS: Conversational, agentic, and built on AWS."*
+### Scene 6: Clinical EHR Sync, Quantitative Results & AWS Marketplace (2:56 – 3:30)
+- **Visuals**: Smooth scroll to Clinic Operations Center showing real-time SOAP note and FHIR sync. Scroll down to AWS CDS Deliverability & Financial Impact Analytics dashboard (99.4% RCS delivery rate, 99.6% operational cost reduction: $0.027 vs $6.50).
+- **Spoken Voiceover**:
+  > *"In the Clinic Operations Center, healthcare providers see real-time FHIR SOAP notes synchronized automatically. Crucially, our telemetry demonstrates a ninety-nine point four percent message deliverability rate and reduces post-discharge triage costs from six dollars and fifty cents per call to under three cents per automated interaction—a ninety-nine point six percent savings. Packaged with AWS CDK, OmniCare CDS is ready for immediate deployment on AWS Marketplace. Thank you!"*
