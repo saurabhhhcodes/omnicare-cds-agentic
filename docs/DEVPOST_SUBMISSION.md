@@ -32,9 +32,9 @@ AWS Communication Developer Services (CDS), AWS End User Messaging (EUM), Rich C
 - [x] **Best of WhatsApp — Sponsored by Meta ($10,000 USD)**
 
 ### 5. Links & Deliverables
-- **Live Working Public Web Endpoint**: `https://state-roses-dinner-rogers.trycloudflare.com/`
-- **Interactive OpenAPI / Swagger Docs**: `https://state-roses-dinner-rogers.trycloudflare.com/docs`
-- **Health Diagnostics**: `https://state-roses-dinner-rogers.trycloudflare.com/health`
+- **Live Working Public Web Endpoint**: `https://township-cord-gulf-manhattan.trycloudflare.com/`
+- **Interactive OpenAPI / Swagger Docs**: `https://township-cord-gulf-manhattan.trycloudflare.com/docs`
+- **Health Diagnostics**: `https://township-cord-gulf-manhattan.trycloudflare.com/health`
 - **GitHub Repository (Apache 2.0)**: `https://github.com/saurabhhhcodes/omnicare-cds-agentic`
 - **YouTube Master Video with Intro & Outro (4m 35s)**: `omnicare_youtube_master_hd.mp4` (Directly Postable to YouTube: Creator Intro, Full Product Journey, Creator Outro, Human Neural Voice)
 - **Compact Hackathon Demo Video (3m 30s)**: `omnicare_master_demo_narrated_hd.mp4` (Narrated Product Demo)

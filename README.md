@@ -12,7 +12,7 @@
 [![Pytest](https://img.shields.io/badge/Pytest-11%2F11%20Passed%20(100%25)-brightgreen?logo=pytest&logoColor=white)](https://pytest.org)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-[**Master Narrated Demo (3m 30s)**](omnicare_master_demo_narrated_hd.mp4) • [**Short Walkthrough (34s)**](omnicare_walkthrough_narrated.mp4) • [**Devpost Submission Pack**](docs/DEVPOST_SUBMISSION.md) • [**Architecture Specs**](docs/ARCHITECTURE.md) • [**Video Script & Prompts**](docs/DEMO_VIDEO_SCRIPT.md) • [**Quickstart**](#-quick-start-guide)
+[**YouTube Master Video with Intro & Outro (4m 35s)**](omnicare_youtube_master_hd.mp4) • [**Live Deployed Platform**](https://township-cord-gulf-manhattan.trycloudflare.com/) • [**Devpost Submission Pack**](docs/DEVPOST_SUBMISSION.md) • [**Architecture Specs**](docs/ARCHITECTURE.md) • [**Video Script & Prompts**](docs/DEMO_VIDEO_SCRIPT.md) • [**Quickstart**](#-quick-start-guide)
 
 ---
 
@@ -26,7 +26,7 @@ Every year, millions of post-discharge patients suffer preventable complications
 
 Patients fluidly transition across channels without losing context:
 1. **AWS EUM SMS**: Proactive outbound post-discharge check-in.
-2. **AWS EUM Social (WhatsApp)**: 2-way conversational triage & multimodal photo diagnostics (*Targeting Meta's \$10,000 Prize*).
+2. **AWS EUM Social (WhatsApp)**: 2-way conversational triage & multimodal photo diagnostics (*Meta Cloud API Verified WABA*).
 3. **AWS EUM RCS (GSMA UP 2.4)**: Interactive, geolocated Pharmacy Carousel with 1-tap booking chips.
 4. **Amazon SES**: Authenticated clinical discharge summary with contactless QR code express pickup pass.
 5. **Amazon Bedrock AgentCore**: Multi-agent brain (Claude 3.5 Sonnet) preserving the clinical context graph across all channels.
