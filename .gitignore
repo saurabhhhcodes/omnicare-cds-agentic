@@ -35,3 +35,6 @@ Thumbs.db
 audio_assets/
 recorder/youtube_recordings/
 recorder/videos/
+data/
+data/uploads/
+*.db

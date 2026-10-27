@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { CheckCheck, Send, Image as ImageIcon, Mic, Phone, Video, MoreVertical, Paperclip, AlertCircle, ShieldCheck } from 'lucide-react'
+import React, { useState, useRef } from 'react'
+import { CheckCheck, Send, Image as ImageIcon, Mic, Phone, Video, MoreVertical, Paperclip, AlertCircle, ShieldCheck, Upload } from 'lucide-react'
 import { MessageItem } from '../types'
 
 interface WhatsAppViewProps {
@@ -16,12 +16,46 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
   isLoading
 }) => {
   const [inputText, setInputText] = useState('')
+  const [isUploading, setIsUploading] = useState(false)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault()
     if (!inputText.trim()) return
     onSendMessage(inputText)
     setInputText('')
+  }
+
+  const handleRealFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setIsUploading(true)
+    const formData = new FormData()
+    formData.append('file', file)
+
+    try {
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      })
+      if (res.ok) {
+        const data = await res.json()
+        onSendMessage(
+          inputText.trim() || `Here is a photo of my ${file.name.toLowerCase().includes('rash') ? 'rash' : 'swollen ankles'} for Dr. Chen's clinical review.`,
+          data.url
+        )
+        setInputText('')
+      } else {
+        alert('Image upload failed. Please try again.')
+      }
+    } catch (err) {
+      console.error('File upload error:', err)
+      alert('Network error while uploading image.')
+    } finally {
+      setIsUploading(false)
+      if (fileInputRef.current) fileInputRef.current.value = ''
+    }
   }
 
   const handleSamplePhoto = (type: 'edema' | 'rash') => {
@@ -40,6 +74,15 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
 
   return (
     <div className="flex flex-col h-[640px] bg-[#0b141a] text-slate-100 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl relative font-sans">
+      {/* Hidden File Input for Real Custom Uploads */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept="image/*"
+        className="hidden"
+        onChange={handleRealFileUpload}
+      />
+
       {/* WhatsApp Header */}
       <div className="bg-[#202c33] px-4 py-3 flex items-center justify-between border-b border-slate-700/50 z-10">
         <div className="flex items-center gap-3">
@@ -106,10 +149,10 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
                 {/* Media Image if present */}
                 {payload.media_url && (
                   <div className="mb-2 rounded-md overflow-hidden border border-black/20">
-                    <img src={payload.media_url} alt="Uploaded Symptom" className="w-full h-36 object-cover" />
+                    <img src={payload.media_url} alt="Uploaded Symptom" className="w-full h-40 object-cover" />
                     <div className="bg-black/60 p-1.5 text-[10px] text-emerald-300 font-mono flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                      Bedrock Claude 3.5 Multimodal Analysis Complete
+                      Amazon Bedrock Claude 3.5 Multimodal Analysis Complete
                     </div>
                   </div>
                 )}
@@ -127,10 +170,10 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
                     {buttons.map((b: any, i: number) => (
                       <button
                         key={i}
-                        onClick={() => onSendMessage(b.reply.title)}
+                        onClick={() => onSendMessage(b.reply?.title || b.title || b)}
                         className="w-full py-1.5 px-3 rounded bg-[#111b21] hover:bg-[#2a3942] text-emerald-400 font-semibold text-xs border border-emerald-500/20 text-center transition-colors"
                       >
-                        {b.reply.title}
+                        {b.reply?.title || b.title || b}
                       </button>
                     ))}
                   </div>
@@ -140,29 +183,36 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
           )
         })}
 
-        {isLoading && (
+        {(isLoading || isUploading) && (
           <div className="flex items-center gap-2 text-xs text-[#8696a0] italic px-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            OmniCare Clinical Agent is typing...
+            {isUploading ? 'Uploading & encrypting image...' : 'OmniCare Clinical Agent is analyzing...'}
           </div>
         )}
       </div>
 
       {/* Diagnostic Shortcut Tray */}
       <div className="bg-[#182229] px-3 py-1.5 border-t border-slate-800 flex items-center justify-between text-xs">
-        <span className="text-[11px] text-slate-400 font-medium">Quick Vision Diagnostics:</span>
+        <span className="text-[11px] text-slate-400 font-medium">Vision Diagnostics:</span>
         <div className="flex gap-1.5">
           <button
-            onClick={() => handleSamplePhoto('edema')}
-            className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20"
+            onClick={() => fileInputRef.current?.click()}
+            className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 flex items-center gap-1"
           >
-            📸 Upload Ankle Edema Photo
+            <Upload className="w-3 h-3" />
+            Upload Any Photo
+          </button>
+          <button
+            onClick={() => handleSamplePhoto('edema')}
+            className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700"
+          >
+            Sample Edema
           </button>
           <button
             onClick={() => handleSamplePhoto('rash')}
-            className="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20"
+            className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700"
           >
-            📸 Upload Rash Photo
+            Sample Rash
           </button>
         </div>
       </div>
@@ -171,9 +221,17 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
       <form onSubmit={handleSend} className="bg-[#202c33] p-2.5 flex items-center gap-2 border-t border-slate-700/50">
         <button
           type="button"
+          onClick={() => fileInputRef.current?.click()}
+          title="Upload Symptom Image from Device"
+          className="text-[#8696a0] hover:text-white p-1.5 transition-colors"
+        >
+          <Paperclip className="w-5 h-5" />
+        </button>
+        <button
+          type="button"
           onClick={() => handleSamplePhoto('edema')}
-          title="Attach Symptom Image"
-          className="text-[#8696a0] hover:text-white p-1.5"
+          title="Quick Preset Image"
+          className="text-[#8696a0] hover:text-white p-1.5 transition-colors"
         >
           <ImageIcon className="w-5 h-5" />
         </button>
@@ -181,7 +239,7 @@ export const WhatsAppView: React.FC<WhatsAppViewProps> = ({
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="Message OmniCare on WhatsApp..."
+          placeholder="Ask Dr. Chen's AI (meds, symptoms, refills)..."
           className="flex-1 bg-[#2a3942] text-slate-100 placeholder-[#8696a0] text-xs px-3.5 py-2.5 rounded-lg outline-none focus:ring-1 focus:ring-emerald-500"
         />
         <button

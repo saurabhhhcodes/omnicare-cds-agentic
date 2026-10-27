@@ -1,11 +1,12 @@
 import os
 import json
+import uuid
 import asyncio
 from contextlib import asynccontextmanager
 from typing import List, Dict, Any, Optional
 from pathlib import Path
 
-from fastapi import FastAPI, Depends, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Depends, HTTPException, WebSocket, WebSocketDisconnect, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, JSONResponse
@@ -19,6 +20,7 @@ from .services.patient_service import seed_default_data
 from .services.telemetry_service import get_cds_telemetry
 from .bedrock_agent.agent_core import bedrock_agent_core
 from .aws_cds.eum_sms import eum_sms_service
+from .aws_cds.ses_email import ses_email_service
 
 # Ensure DB tables are ready on import
 init_db()
@@ -48,6 +50,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Uploads directory
+UPLOADS_DIR = settings.DATA_DIR / "uploads"
+UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 
 # WebSocket Connection Manager
 class ConnectionManager:
@@ -82,6 +89,19 @@ class InboundMessageRequest(BaseModel):
 class ScenarioStartRequest(BaseModel):
     scenario_type: str = "HEART_FAILURE_TITRATION" # HEART_FAILURE_TITRATION or CELLULITIS_RASH
 
+class AwsConfigRequest(BaseModel):
+    aws_region: Optional[str] = None
+    aws_cds_mode: Optional[str] = None
+    aws_access_key_id: Optional[str] = None
+    aws_secret_access_key: Optional[str] = None
+    bedrock_model_id: Optional[str] = None
+    ses_sender_email: Optional[str] = None
+
+class EmailTestRequest(BaseModel):
+    recipient_email: str
+    patient_name: str = "Elena Rostova"
+    medication: str = "Metoprolol Succinate ER 50mg"
+
 # --- API Endpoints ---
 
 @app.get("/health")
@@ -101,6 +121,73 @@ def health_check():
             "amazon_bedrock_agentcore": f"ACTIVE ({settings.BEDROCK_MODEL_ID})"
         }
     }
+
+@app.get("/api/config/aws")
+def get_aws_config():
+    return {
+        "aws_region": settings.AWS_REGION,
+        "aws_cds_mode": settings.AWS_CDS_MODE,
+        "bedrock_model_id": settings.BEDROCK_MODEL_ID,
+        "ses_sender_email": settings.AWS_SES_SENDER_EMAIL,
+        "origination_number": settings.AWS_EUM_ORIGINATION_NUMBER,
+        "has_credentials": bool(os.getenv("AWS_ACCESS_KEY_ID")),
+        "services": {
+            "aws_eum_sms": "ONLINE (10DLC High Volume)",
+            "aws_eum_rcs": "ONLINE (GSMA UP 2.4 Verified)",
+            "aws_eum_whatsapp": "ONLINE (Meta Cloud API WABA)",
+            "amazon_ses": "ONLINE (DKIM/SPF Signed)",
+            "amazon_bedrock": f"ONLINE ({settings.BEDROCK_MODEL_ID})"
+        }
+    }
+
+@app.post("/api/config/aws")
+def update_aws_config(req: AwsConfigRequest):
+    if req.aws_region:
+        settings.AWS_REGION = req.aws_region
+    if req.aws_cds_mode:
+        settings.AWS_CDS_MODE = req.aws_cds_mode
+    if req.bedrock_model_id:
+        settings.BEDROCK_MODEL_ID = req.bedrock_model_id
+    if req.ses_sender_email:
+        settings.AWS_SES_SENDER_EMAIL = req.ses_sender_email
+    if req.aws_access_key_id:
+        os.environ["AWS_ACCESS_KEY_ID"] = req.aws_access_key_id
+    if req.aws_secret_access_key:
+        os.environ["AWS_SECRET_ACCESS_KEY"] = req.aws_secret_access_key
+    return {
+        "status": "CONFIG_UPDATED",
+        "aws_region": settings.AWS_REGION,
+        "aws_cds_mode": settings.AWS_CDS_MODE,
+        "bedrock_model_id": settings.BEDROCK_MODEL_ID
+    }
+
+@app.post("/api/upload")
+async def upload_file(file: UploadFile = File(...)):
+    ext = Path(file.filename or "image.jpg").suffix or ".jpg"
+    filename = f"symptom_{uuid.uuid4().hex[:10]}{ext}"
+    target_path = UPLOADS_DIR / filename
+    content = await file.read()
+    with open(target_path, "wb") as f:
+        f.write(content)
+    return {
+        "url": f"/uploads/{filename}",
+        "filename": filename,
+        "size_bytes": len(content)
+    }
+
+@app.post("/api/email/dispatch-test")
+def dispatch_test_email(req: EmailTestRequest):
+    res = ses_email_service.send_clinical_summary_email(
+        recipient_email=req.recipient_email,
+        patient_name=req.patient_name,
+        medication_name=req.medication,
+        dosage="50mg Oral Daily",
+        instructions="Take one tablet by mouth once daily in the morning with food. Do not skip doses.",
+        pharmacy_name="CVS Health #4192 (742 Evergreen Terrace, West Springfield)",
+        pickup_slot="Today between 4:00 PM – 6:00 PM",
+        qr_token=f"RX-TEST-{uuid.uuid4().hex[:8].upper()}"
+    )
+    return res
 
 @app.get("/api/patients")
 def list_patients(db: Session = Depends(get_db)):

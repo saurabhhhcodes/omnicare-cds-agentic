@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Send, ShieldCheck, MapPin, Clock, ArrowRight, CornerDownLeft, Sparkles } from 'lucide-react'
+import { Send, ShieldCheck, MapPin, Clock, ArrowRight, CornerDownLeft, Sparkles, Navigation } from 'lucide-react'
 import { MessageItem } from '../types'
 
 interface RcsSmsViewProps {
@@ -107,7 +107,7 @@ export const RcsSmsView: React.FC<RcsSmsViewProps> = ({
 
                           <button
                             onClick={() => onSelectPharmacy(card.postback)}
-                            className="mt-3 w-full py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/20 transition-colors"
+                            className="mt-3 w-full py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/20 transition-colors cursor-pointer"
                           >
                             <span>1-Tap Select</span>
                             <ArrowRight className="w-3 h-3" />
@@ -148,22 +148,34 @@ export const RcsSmsView: React.FC<RcsSmsViewProps> = ({
       {/* Suggested Quick Replies Tray */}
       <div className="bg-slate-800/60 p-2 border-t border-slate-700/60 flex items-center gap-1.5 overflow-x-auto text-xs">
         <button
-          onClick={() => onSendMessage("PHARMACY")}
+          onClick={() => onSendMessage("Find Pharmacies")}
           className="px-2.5 py-1 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs shrink-0 font-medium"
         >
           📍 Find Pharmacies
+        </button>
+        <button
+          onClick={() => onSendMessage("How should I take my Metoprolol?")}
+          className="px-2.5 py-1 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs shrink-0 font-medium"
+        >
+          💊 Dosage Directions
+        </button>
+        <button
+          onClick={() => onSendMessage("What should I do if I missed a dose?")}
+          className="px-2.5 py-1 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs shrink-0 font-medium"
+        >
+          ⏰ Missed Dose
+        </button>
+        <button
+          onClick={() => onSendMessage("Can I take ibuprofen with my heart medications?")}
+          className="px-2.5 py-1 rounded-full bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-xs shrink-0 font-medium"
+        >
+          ⚠️ Ibuprofen Check
         </button>
         <button
           onClick={() => onSendMessage("WHATSAPP")}
           className="px-2.5 py-1 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 text-xs shrink-0 font-medium"
         >
           💬 Switch to WhatsApp
-        </button>
-        <button
-          onClick={() => onSendMessage("How should I take my Metoprolol?")}
-          className="px-2.5 py-1 rounded-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs shrink-0 font-medium"
-        >
-          ❓ Dosage Question
         </button>
       </div>
 
@@ -173,7 +185,7 @@ export const RcsSmsView: React.FC<RcsSmsViewProps> = ({
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          placeholder="Type an SMS or RCS message..."
+          placeholder="Ask Dr. Chen's care team (SMS or RCS)..."
           className="flex-1 bg-slate-900 text-slate-100 placeholder-slate-500 text-xs px-3.5 py-2.5 rounded-lg outline-none focus:ring-1 focus:ring-blue-500 border border-slate-700"
         />
         <button

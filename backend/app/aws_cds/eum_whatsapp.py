@@ -5,7 +5,7 @@ from ..config import settings
 
 class EumWhatsAppService:
     """
-    AWS End User Messaging Social (WhatsApp) Adapter — Sponsored by Meta ($10,000 Prize Track).
+    AWS End User Messaging Social (WhatsApp) Adapter.
     Implements Meta Cloud API / WhatsApp Business Platform over AWS CDS infrastructure:
     - Verified Business Account (WABA) with green badge
     - 2-way Conversational AI with Amazon Bedrock AgentCore
