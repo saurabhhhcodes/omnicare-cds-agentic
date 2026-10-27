@@ -37,16 +37,16 @@ class AgentTools:
         In production, executes Amazon Bedrock Claude 3.5 Sonnet multimodal vision call.
         """
         # Simulated intelligent vision inference
-        is_rash = "rash" in symptom_context.lower() or "skin" in symptom_context.lower()
-        is_swelling = "swelling" in symptom_context.lower() or "edema" in symptom_context.lower()
+        is_rash = "rash" in symptom_context.lower() or "skin" in symptom_context.lower() or "red" in symptom_context.lower()
+        is_swelling = any(k in symptom_context.lower() for k in ["swelling", "swollen", "edema", "ankle", "feet", "puff"])
         
         if is_swelling:
             return {
-                "detected_feature": "Bilateral Pre-tibial Peripheral Edema",
+                "detected_feature": "Bilateral Pre-tibial Peripheral Edema (+2 Pitting)",
                 "severity": "MODERATE_ELEVATED",
                 "confidence": 0.94,
-                "clinical_observation": "Pitting edema (2mm depth) visible on lower extremities. Possible fluid overload secondary to Congestive Heart Failure titration.",
-                "triage_recommendation": "Adjust Furosemide dosage; consult cardiologist if shortness of breath develops."
+                "clinical_observation": "+2 Bilateral Pitting Edema visible on lower extremities. Possible fluid retention secondary to Congestive Heart Failure titration.",
+                "triage_recommendation": "Adjust Furosemide dosage from 20mg to 40mg; schedule pharmacy refill pickup."
             }
         elif is_rash:
             return {

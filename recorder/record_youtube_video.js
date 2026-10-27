@@ -63,7 +63,7 @@ async function recordYouTubeMaster() {
   // Hover over terminal build
   try {
     await page.locator('text=11 passed in 0.27s').hover();
-    await sleep(5000);
+    await sleep(6000);
   } catch (e) {}
 
   const s0Elapsed = (Date.now() - s0Start) / 1000;
@@ -79,43 +79,44 @@ async function recordYouTubeMaster() {
   const s1Start = Date.now();
 
   await page.goto('http://127.0.0.1:8000/', { waitUntil: 'networkidle' });
-  await sleep(2000);
+  await sleep(2500);
 
-  // Hover over header and patient card
-  try {
-    await page.locator('text=OmniCare').first().hover();
-    await sleep(3000);
-  } catch (e) {}
-
-  const waTabBtn = page.locator('button:has-text("WhatsApp Messenger")');
-  await waTabBtn.click();
-  await sleep(3000);
-
-  // Upload edema photo
-  const uploadEdemaBtn = page.locator('button:has-text("📸 Upload Ankle Edema Photo")');
-  if (await uploadEdemaBtn.isVisible()) {
-    await uploadEdemaBtn.click();
-    console.log('   📸 Uploaded Ankle Edema Photo to WhatsApp...');
-    await sleep(7000);
+  // Reset to fresh Scenario A
+  const resetBtn = page.locator('button[title="Reset Scenario State"]');
+  if (await resetBtn.isVisible()) {
+    await resetBtn.click();
+    await sleep(1500);
   }
 
-  // Hover over clinical diagnosis bubble
+  // Switch to WhatsApp Tab
+  const waTabBtn = page.locator('button:has-text("WhatsApp")').first();
+  await waTabBtn.click();
+  await sleep(2500);
+
+  // Click Upload Ankle Edema Photo
+  const uploadEdemaBtn = page.locator('button:has-text("📸 Upload Ankle Edema Photo")');
+  await uploadEdemaBtn.waitFor({ state: 'visible', timeout: 5000 });
+  await uploadEdemaBtn.click();
+  console.log('   📸 Uploaded Ankle Edema Photo to WhatsApp...');
+
+  // Wait for diagnosis bubble to appear
+  const diagBubble = page.locator('text=+2 Bilateral Pitting Edema').first();
+  await diagBubble.waitFor({ state: 'visible', timeout: 12000 });
+  console.log('   ✅ AI Diagnosis bubble appeared!');
+  await sleep(4000);
+
+  // Hover over diagnosis bubble
   try {
-    const bubble = page.locator('text=+2 Bilateral Pitting Edema').first();
-    if (await bubble.isVisible()) {
-      await bubble.hover();
-      await sleep(5000);
-    }
+    await diagBubble.hover();
+    await sleep(4000);
   } catch (e) {}
 
-  // Hover over quick reply
-  try {
-    const findPharmBtn = page.locator('button:has-text("Find Pharmacies")').first();
-    if (await findPharmBtn.isVisible()) {
-      await findPharmBtn.hover();
-      await sleep(4000);
-    }
-  } catch (e) {}
+  // Hover over "Find Pharmacies" action chip
+  const findPharmBtn = page.locator('button:has-text("Find Pharmacies")').first();
+  if (await findPharmBtn.isVisible()) {
+    await findPharmBtn.hover();
+    await sleep(4000);
+  }
 
   const s1Elapsed = (Date.now() - s1Start) / 1000;
   const s1Remaining = Math.max(0, s1.total_scene_duration - s1Elapsed);
@@ -123,43 +124,46 @@ async function recordYouTubeMaster() {
   await sleep(s1Remaining * 1000);
 
   // -------------------------------------------------------------
-  // SCENE 2: GSMA UP 2.4 RCS Interactive Pharmacy Carousel
+  // SCENE 2: GSMA UP 2.4 RCS Interactive Pharmacy Carousel (Target: ~43.2s)
   // -------------------------------------------------------------
   const s2 = timingData.scenes[2];
   console.log(`\n📌 [Scene 2] ${s2.title} (${s2.total_scene_duration.toFixed(1)}s)...`);
   const s2Start = Date.now();
 
-  const findPharmBtn = page.locator('button:has-text("Find Pharmacies")').first();
+  // Click "Find Pharmacies" in WhatsApp
   if (await findPharmBtn.isVisible()) {
     await findPharmBtn.click();
+    console.log('   📍 Clicked "Find Pharmacies" in WhatsApp...');
     await sleep(2000);
   }
 
-  const rcsTabBtn = page.locator('button:has-text("RCS & SMS Chat")');
+  // Switch to RCS Tab
+  const rcsTabBtn = page.locator('button:has-text("RCS & SMS")').first();
   await rcsTabBtn.click();
+  await sleep(2500);
+
+  // Wait for CVS Health card in carousel
+  const cvsCard = page.locator('text=CVS Health').first();
+  await cvsCard.waitFor({ state: 'visible', timeout: 10000 });
+  console.log('   ✅ CVS Health card visible in RCS carousel!');
   await sleep(3000);
 
-  // Inspect pharmacy cards
+  // Hover over pharmacy cards
   try {
-    const cvsCard = page.locator('text=CVS Pharmacy').first();
-    if (await cvsCard.isVisible()) {
-      await cvsCard.hover();
-      await sleep(4000);
-    }
+    await cvsCard.hover();
+    await sleep(3500);
     const walgreensCard = page.locator('text=Walgreens').first();
     if (await walgreensCard.isVisible()) {
       await walgreensCard.hover();
-      await sleep(4000);
+      await sleep(3500);
     }
   } catch (e) {}
 
-  // 1-Tap Select CVS Pharmacy
+  // 1-Tap Select CVS Health Pharmacy
   const selectPharmBtn = page.locator('button:has-text("1-Tap Select")').first();
-  if (await selectPharmBtn.isVisible()) {
-    await selectPharmBtn.click();
-    console.log('   ✅ Clicked "1-Tap Select" on CVS Pharmacy card...');
-    await sleep(6000);
-  }
+  await selectPharmBtn.click();
+  console.log('   ✅ Clicked "1-Tap Select" on CVS Pharmacy card...');
+  await sleep(4000);
 
   const s2Elapsed = (Date.now() - s2Start) / 1000;
   const s2Remaining = Math.max(0, s2.total_scene_duration - s2Elapsed);
@@ -167,32 +171,34 @@ async function recordYouTubeMaster() {
   await sleep(s2Remaining * 1000);
 
   // -------------------------------------------------------------
-  // SCENE 3: Amazon SES Verified Prescription Pass & QR
+  // SCENE 3: Amazon SES Verified Prescription Pass & QR (Target: ~33.9s)
   // -------------------------------------------------------------
   const s3 = timingData.scenes[3];
   console.log(`\n📌 [Scene 3] ${s3.title} (${s3.total_scene_duration.toFixed(1)}s)...`);
   const s3Start = Date.now();
 
-  const emailTabBtn = page.locator('button:has-text("Amazon SES Inbox")');
+  const emailTabBtn = page.locator('button:has-text("Amazon SES Inbox")').first();
   await emailTabBtn.click();
-  await sleep(3000);
+  await sleep(2500);
 
-  // Hover over DKIM & SPF verification pills
+  // Wait for verified email header
+  const emailHeader = page.locator('text=Amazon SES Verified Dispatch').first();
+  await emailHeader.waitFor({ state: 'visible', timeout: 10000 });
+  console.log('   ✅ Verified Amazon SES email rendered with QR pass!');
+
+  // Hover over DKIM verification pill
   try {
-    const dkim = page.locator('text=DKIM: PASS').first();
+    const dkim = page.locator('text=DKIM: Valid').first();
     if (await dkim.isVisible()) {
       await dkim.hover();
-      await sleep(3000);
+      await sleep(3500);
     }
   } catch (e) {}
 
-  // Hover over QR pass
+  // Hover over Rx details and QR code
   try {
-    const qrPass = page.locator('text=Express Pickup Pass').first();
-    if (await qrPass.isVisible()) {
-      await qrPass.hover();
-      await sleep(5000);
-    }
+    await emailHeader.hover();
+    await sleep(4000);
   } catch (e) {}
 
   const s3Elapsed = (Date.now() - s3Start) / 1000;
@@ -201,30 +207,29 @@ async function recordYouTubeMaster() {
   await sleep(s3Remaining * 1000);
 
   // -------------------------------------------------------------
-  // SCENE 4: Bedrock AgentCore State Machine & Multi-Agent Trace
+  // SCENE 4: Bedrock AgentCore State Machine & Multi-Agent Trace (Target: ~30.4s)
   // -------------------------------------------------------------
   const s4 = timingData.scenes[4];
   console.log(`\n📌 [Scene 4] ${s4.title} (${s4.total_scene_duration.toFixed(1)}s)...`);
   const s4Start = Date.now();
 
+  // Inspect Bedrock AgentCore trace panel
   const inspectBtn = page.locator('button:has-text("Inspect I/O")').first();
   if (await inspectBtn.isVisible()) {
     await inspectBtn.click();
-    console.log('   🔍 Opened Bedrock AgentCore I/O modal...');
-    await sleep(7000);
+    console.log('   🔍 Expanded Bedrock AgentCore I/O payload...');
+    await sleep(6000);
 
-    const closeBtn = page.locator('button:has-text("Close")').first();
-    if (await closeBtn.isVisible()) {
-      await closeBtn.click();
-      await sleep(2000);
-    }
+    // Toggle back
+    await inspectBtn.click();
+    await sleep(2000);
   }
 
   // Hover over agent nodes
   try {
-    const agents = page.locator('text=VisionTriageAgent').first();
-    if (await agents.isVisible()) {
-      await agents.hover();
+    const agentNode = page.locator('text=VisionTriageAgent').first();
+    if (await agentNode.isVisible()) {
+      await agentNode.hover();
       await sleep(4000);
     }
   } catch (e) {}
@@ -235,7 +240,7 @@ async function recordYouTubeMaster() {
   await sleep(s4Remaining * 1000);
 
   // -------------------------------------------------------------
-  // SCENE 5: Clinic Operations Center & Analytics
+  // SCENE 5: Clinic Operations Center & Analytics (Target: ~29.2s)
   // -------------------------------------------------------------
   const s5 = timingData.scenes[5];
   console.log(`\n📌 [Scene 5] ${s5.title} (${s5.total_scene_duration.toFixed(1)}s)...`);
@@ -243,11 +248,11 @@ async function recordYouTubeMaster() {
 
   console.log('   📜 Scrolling to Clinic Operations Center...');
   await page.evaluate(() => window.scrollBy({ top: 550, behavior: 'smooth' }));
-  await sleep(8000);
+  await sleep(7000);
 
   console.log('   📊 Scrolling to Analytics & Deliverability Dashboard...');
   await page.evaluate(() => window.scrollBy({ top: 550, behavior: 'smooth' }));
-  await sleep(10000);
+  await sleep(8000);
 
   try {
     const savings = page.locator('text=99.6%').first();
@@ -276,7 +281,6 @@ async function recordYouTubeMaster() {
   await page.goto('http://127.0.0.1:8000/outro.html', { waitUntil: 'networkidle' });
   await sleep(3000);
 
-  // Hover over stats and repo
   try {
     await page.locator('text=99.6%').hover();
     await sleep(4000);

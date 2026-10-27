@@ -30,3 +30,8 @@ data/*.sqlite3
 # OS
 .DS_Store
 Thumbs.db
+*.mp4
+*.webm
+audio_assets/
+recorder/youtube_recordings/
+recorder/videos/

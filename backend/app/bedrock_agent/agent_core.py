@@ -152,7 +152,7 @@ class BedrockAgentCore:
             outbound_messages.append(ses_res)
 
         # SCENARIO A: Patient requests interactive booking or pharmacy options
-        elif "pharmacy" in content_lower or "pickup" in content_lower or "schedule" in content_lower or "refill" in content_lower or "action_schedule_pickup" in content_lower:
+        elif "pharmac" in content_lower or "pickup" in content_lower or "schedule" in content_lower or "refill" in content_lower or "action_schedule_pickup" in content_lower:
             t1 = time.perf_counter()
             thought_2 = "Patient requested pharmacy selection or prescription fulfillment. Upgrading engagement to AWS EUM RCS Carousel to present interactive, geolocated pharmacy cards with 1-tap booking."
             
