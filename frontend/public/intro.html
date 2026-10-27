@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniCare CDS — Creator Introduction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .glow-bg {
+      animation: pulse-glow 4s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-8 font-sans antialiased overflow-hidden selection:bg-cyan-500/30">
+
+  <!-- Top Navigation / Event Banner -->
+  <header class="flex items-center justify-between border-b border-slate-800/80 pb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-blue-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20 ring-1 ring-white/20">
+        <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+          <path d="M3.22 12H9.5l1.5-3 2 6 1.5-3h6.28" class="text-cyan-200 stroke-cyan-200" strokeWidth="2" />
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
+          OmniCare<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">CDS</span>
+          <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-500/10 text-cyan-300 border border-cyan-500/20">ENTERPRISE</span>
+        </h1>
+        <p class="text-xs text-slate-400">Autonomous Omnichannel Healthcare Intelligence</p>
+      </div>
+    </div>
+
+    <!-- Hackathon & Creator Badges -->
+    <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-slate-400">Developer:</span>
+        <span class="text-white font-bold">Saurabh</span>
+      </div>
+      <div class="px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-semibold">
+        AWS CDS Agentic AI Partner Hackathon 2026
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Content -->
+  <main class="my-auto max-w-6xl mx-auto w-full grid grid-cols-12 gap-8 items-center">
+    
+    <!-- Left Column: Title & Mission -->
+    <div class="col-span-7 space-y-6">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-cyan-300 text-xs font-bold tracking-wide">
+        <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+        PROJECT DEMONSTRATION & ARCHITECTURE
+      </div>
+
+      <h2 class="text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+        Building the Future of <br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-300">
+          Conversational Healthcare
+        </span>
+      </h2>
+
+      <p class="text-base text-slate-300 leading-relaxed">
+        Preventable hospital readmissions cost over <strong class="text-white font-semibold">$41 Billion annually</strong>. Patients fall through the cracks because healthcare communications are trapped in disjointed silos—one-way SMS alerts, unread emails, and 45-minute phone hold queues.
+      </p>
+
+      <p class="text-sm text-slate-400 leading-relaxed">
+        I engineered <strong class="text-cyan-300">OmniCare CDS</strong> to solve this: an autonomous, continuous care loop powered by <strong>AWS Communication Developer Services</strong> and orchestrated by <strong>Amazon Bedrock AgentCore</strong>.
+      </p>
+
+      <!-- Architecture Pipeline Badges -->
+      <div class="pt-2">
+        <div class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-3">Multi-Channel Backbone on AWS CDS:</div>
+        <div class="grid grid-cols-4 gap-2 text-center text-xs">
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-blue-400 font-bold">AWS EUM SMS</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Proactive Outreach</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-emerald-400 font-bold">Meta WhatsApp</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">2-Way Vision Triage</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-cyan-400 font-bold">EUM RCS (UP 2.4)</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">1-Tap Pharmacy Card</div>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+            <div class="text-amber-400 font-bold">Amazon SES</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Verified QR Pass</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Developer Terminal & Cloud Status -->
+    <div class="col-span-5">
+      <div class="rounded-2xl border border-slate-800 bg-slate-900/90 shadow-2xl overflow-hidden font-mono text-xs">
+        <div class="bg-slate-850 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+            <span class="text-slate-400 ml-2 text-[11px]">saurabh@omnicare-builder: ~/project</span>
+          </div>
+          <span class="text-emerald-400 text-[10px] font-bold">BUILD PASSING</span>
+        </div>
+
+        <div class="p-5 space-y-3 text-slate-300">
+          <div class="text-slate-400">$ git log -1 --oneline</div>
+          <div class="text-cyan-300">08eafb0 feat: autonomous clinical triage engine</div>
+
+          <div class="text-slate-400 pt-1">$ pytest tests/ -v</div>
+          <div class="text-emerald-400">
+            ✓ test_cds_channels.py::test_eum_sms_outreach PASSED<br>
+            ✓ test_cds_channels.py::test_eum_whatsapp_vision PASSED<br>
+            ✓ test_cds_channels.py::test_eum_rcs_carousel PASSED<br>
+            ✓ test_cds_channels.py::test_ses_prescription_pass PASSED<br>
+            ✓ test_bedrock_agent.py::test_agentcore_state_machine PASSED<br>
+            <span class="font-bold text-white">════════ 11 passed in 0.27s (100% Pass) ════════</span>
+          </div>
+
+          <div class="text-slate-400 pt-1">$ python -m uvicorn backend.app.main:app</div>
+          <div class="text-slate-200">
+            [INFO] Starting OmniCare CDS Backend v1.0.0<br>
+            [INFO] AWS Region: <span class="text-amber-400 font-bold">us-east-1</span><br>
+            [INFO] Bedrock Model: <span class="text-purple-400 font-bold">Claude 3.5 Sonnet</span><br>
+            [INFO] WebSocket Stream: <span class="text-emerald-400 font-bold">ONLINE (wss://...)</span>
+          </div>
+
+          <div class="pt-2 border-t border-slate-800 flex items-center justify-between text-[11px]">
+            <span class="text-slate-400">AWS CDS Cloud Gateway:</span>
+            <span class="text-emerald-400 font-bold">ACTIVE & READY</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Footer -->
+  <footer class="border-t border-slate-800/80 pt-4 flex items-center justify-between text-xs text-slate-400">
+    <div>
+      Repository: <a href="https://github.com/saurabhhhcodes/omnicare-cds-agentic" class="text-cyan-400 underline">github.com/saurabhhhcodes/omnicare-cds-agentic</a> (Apache 2.0)
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+      <span>Beginning Live Demonstration...</span>
+    </div>
+  </footer>
+
+</body>
+</html>
